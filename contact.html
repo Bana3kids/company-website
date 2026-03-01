@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="精和機工株式会社へのお問い合わせ・お見積り依頼はこちら。精密部品・治具・専用工具に関するご相談をお気軽にどうぞ。">
+  <title>お問い合わせ | 精和機工株式会社</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-jp">精和機工株式会社</span>
+          <span class="logo-en">SEIWA KIKO CO., LTD.</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav" id="nav" aria-label="メインナビゲーション">
+          <ul class="nav-list">
+            <li><a href="index.html"   class="nav-link">ホーム</a></li>
+            <li><a href="about.html"   class="nav-link">会社概要</a></li>
+            <li><a href="contact.html" class="nav-link active nav-contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero" aria-label="ページタイトル">
+      <div class="container">
+        <div class="page-hero-content">
+          <span class="page-hero-label">CONTACT</span>
+          <h1 class="page-hero-title">お問い合わせ</h1>
+          <p class="page-hero-desc">ご質問・お見積り依頼・資料請求など、お気軽にお問い合わせください</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="section contact-section" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 class="section-title" id="contact-title" style="margin-bottom:40px;">お問い合わせフォーム</h2>
+
+        <div class="contact-inner">
+
+          <!-- Form -->
+          <div class="contact-form-wrap">
+
+            <!-- Success Message (hidden by default) -->
+            <div class="form-success" id="formSuccess" role="alert">
+              <div class="form-success-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 14l6 6 10-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="form-success-title">送信が完了しました</h3>
+              <p class="form-success-text">
+                お問い合わせありがとうございます。<br>
+                内容を確認のうえ、担当者より2営業日以内にご連絡いたします。
+              </p>
+            </div>
+
+            <form id="contactForm" novalidate>
+
+              <!-- お名前 -->
+              <div class="form-group">
+                <label class="form-label" for="name">
+                  お名前<span class="form-required">必須</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-input"
+                  placeholder="例：山田 太郎"
+                  autocomplete="name"
+                  required
+                >
+                <span class="form-error-msg" id="nameError">お名前を入力してください</span>
+              </div>
+
+              <!-- 会社名 -->
+              <div class="form-group">
+                <label class="form-label" for="company">
+                  会社名<span class="form-required">必須</span>
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  class="form-input"
+                  placeholder="例：株式会社〇〇製作所"
+                  autocomplete="organization"
+                  required
+                >
+                <span class="form-error-msg" id="companyError">会社名を入力してください</span>
+              </div>
+
+              <!-- 部署名 -->
+              <div class="form-group">
+                <label class="form-label" for="department">
+                  部署名<span class="form-optional">任意</span>
+                </label>
+                <input
+                  type="text"
+                  id="department"
+                  name="department"
+                  class="form-input"
+                  placeholder="例：製造部 技術課"
+                  autocomplete="organization-title"
+                >
+              </div>
+
+              <!-- メールアドレス -->
+              <div class="form-group">
+                <label class="form-label" for="email">
+                  メールアドレス<span class="form-required">必須</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-input"
+                  placeholder="例：yamada@example.co.jp"
+                  autocomplete="email"
+                  required
+                >
+                <span class="form-error-msg" id="emailError">有効なメールアドレスを入力してください</span>
+              </div>
+
+              <!-- 電話番号 -->
+              <div class="form-group">
+                <label class="form-label" for="tel">
+                  電話番号<span class="form-optional">任意</span>
+                </label>
+                <input
+                  type="tel"
+                  id="tel"
+                  name="tel"
+                  class="form-input"
+                  placeholder="例：0565-00-0000"
+                  autocomplete="tel"
+                >
+              </div>
+
+              <!-- お問い合わせ種別 -->
+              <div class="form-group">
+                <label class="form-label" for="category">
+                  お問い合わせ種別<span class="form-required">必須</span>
+                </label>
+                <select id="category" name="category" class="form-select" required>
+                  <option value="" disabled selected>選択してください</option>
+                  <option value="estimate">お見積り依頼</option>
+                  <option value="trial">試作・サンプル依頼</option>
+                  <option value="tech">技術的なご質問</option>
+                  <option value="delivery">納期に関するご相談</option>
+                  <option value="catalog">資料・カタログ請求</option>
+                  <option value="visit">工場見学のご依頼</option>
+                  <option value="other">その他</option>
+                </select>
+                <span class="form-error-msg" id="categoryError">お問い合わせ種別を選択してください</span>
+              </div>
+
+              <!-- お問い合わせ内容 -->
+              <div class="form-group">
+                <label class="form-label" for="message">
+                  お問い合わせ内容<span class="form-required">必須</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  class="form-textarea"
+                  placeholder="ご依頼の内容・ご要望・材質・数量・納期などをできるだけ詳しくご記入ください。図面・仕様書がある場合はご連絡後にメール添付にてお送りください。"
+                  required
+                ></textarea>
+                <span class="form-error-msg" id="messageError">お問い合わせ内容を入力してください（10文字以上）</span>
+              </div>
+
+              <!-- プライバシーポリシー -->
+              <div class="form-privacy">
+                <input type="checkbox" id="privacy" name="privacy" required>
+                <label class="form-privacy-text" for="privacy">
+                  <a href="#privacy-policy">プライバシーポリシー</a>に同意する
+                  <span class="form-required" style="margin-left:4px;">必須</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="privacyError" style="margin-top:-16px; margin-bottom:20px; display:none;">プライバシーポリシーへの同意が必要です</span>
+
+              <!-- Submit -->
+              <div class="form-submit">
+                <button type="submit" class="btn-submit" id="submitBtn">
+                  送信する
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Sidebar Info -->
+          <aside class="contact-info-box" aria-label="連絡先情報">
+            <h3 class="contact-info-title">お問い合わせ先</h3>
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <span class="contact-info-label">TEL</span>
+                <span class="contact-info-value">
+                  <a href="tel:0565001234">0565-00-1234</a>
+                </span>
+              </div>
+              <div class="contact-info-item">
+                <span class="contact-info-label">FAX</span>
+                <span class="contact-info-value">0565-00-1235</span>
+              </div>
+              <div class="contact-info-item">
+                <span class="contact-info-label">MAIL</span>
+                <span class="contact-info-value">
+                  <a href="mailto:info@seiwa-kiko.co.jp">info@seiwa-kiko.co.jp</a>
+                </span>
+              </div>
+              <div class="contact-info-item">
+                <span class="contact-info-label">所在地</span>
+                <span class="contact-info-value">
+                  〒471-0001<br>
+                  愛知県豊田市明和町1丁目23-4
+                </span>
+              </div>
+              <div class="contact-info-item">
+                <span class="contact-info-label">営業時間</span>
+                <span class="contact-info-value">
+                  平日 8:00〜17:30<br>
+                  土日祝・年末年始は休業
+                </span>
+              </div>
+            </div>
+            <div class="contact-info-note">
+              <p>お急ぎの場合はお電話でのご連絡をお勧めします。</p>
+              <p style="margin-top:8px;">フォームからのお問い合わせは<strong>2営業日以内</strong>を目処にご返信いたします。</p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRIVACY POLICY ===== -->
+    <section class="section section-light" id="privacy-policy" aria-labelledby="privacy-title">
+      <div class="container" style="max-width:800px;">
+        <div class="section-header" style="text-align:left; margin-bottom:28px;">
+          <p class="section-label">PRIVACY POLICY</p>
+          <h2 class="section-title" id="privacy-title" style="font-size:1.4rem;">プライバシーポリシー</h2>
+        </div>
+        <div style="font-size:0.88rem; line-height:1.85; color:var(--text-body);">
+          <p style="margin-bottom:16px;">精和機工株式会社（以下「当社」）は、お客様よりお預かりした個人情報の保護を重要と考え、以下の方針に従い適切に取り扱います。</p>
+
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin-bottom:8px; margin-top:20px;">1. 個人情報の利用目的</h3>
+          <p>お問い合わせへの回答・見積書の作成・製品・サービスに関するご連絡のみに使用します。</p>
+
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin-bottom:8px; margin-top:20px;">2. 個人情報の第三者提供</h3>
+          <p>法令に基づく場合を除き、お客様の同意なく第三者に個人情報を提供することはありません。</p>
+
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin-bottom:8px; margin-top:20px;">3. 個人情報の管理</h3>
+          <p>個人情報への不正アクセス・紛失・漏洩等を防止するため、適切な安全管理措置を実施します。</p>
+
+          <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin-bottom:8px; margin-top:20px;">4. お問い合わせ</h3>
+          <p>個人情報の開示・訂正・削除のご要望は、上記お問い合わせ先までご連絡ください。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <span class="logo-jp">精和機工株式会社</span>
+            <span class="logo-en">SEIWA KIKO CO., LTD.</span>
+          </div>
+          <p class="footer-desc">専用機械の構成部品・治具製造を通じて、日本のものづくりを支え続けています。</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">サイトマップ</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="about.html">会社概要</a></li>
+            <li><a href="contact.html">お問い合わせ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">お問い合わせ</h4>
+          <address class="footer-address">
+            <p>〒471-0001<br>愛知県豊田市明和町1丁目23-4</p>
+            <p>TEL: <a href="tel:0565001234">0565-00-1234</a></p>
+            <p>FAX: 0565-00-1235</p>
+            <p>MAIL: <a href="mailto:info@seiwa-kiko.co.jp">info@seiwa-kiko.co.jp</a></p>
+            <p>営業時間: 平日 8:00〜17:30</p>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 精和機工株式会社 All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
