@@ -3,283 +3,593 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="精和機工株式会社は愛知県豊田市の精密部品・治具製造メーカーです。専用機械の構成部品から各種治具まで、高精度加工技術と徹底した品質管理でお客様のものづくりを支えます。">
-  <title>精和機工株式会社 | 精密部品・治具製造</title>
-  <link rel="stylesheet" href="style.css">
+  <title>株式会社小瀬 | 精密加工</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --steel: #b8c4cc;
+      --silver: #d6dde3;
+      --gold: #c8a96e;
+      --dim: #2a2f35;
+      --text: #e8eaec;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    .shank { fill: #7a8a96; stroke: #b8c4cc; stroke-width: 0.5; }
+    .flute { fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; }
+    .tip   { fill: var(--gold); opacity: 0.9; }
+    .cutting-edge { fill: none; stroke: #e0e8f0; stroke-width: 1; }
+    .spin-group {
+      transform-origin: 80px 80px;
+      animation: spinCutter 1.2s linear infinite;
+    }
+    @keyframes spinCutter {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .bg-lines {
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -45deg, transparent, transparent 40px,
+        rgba(184,196,204,0.03) 40px, rgba(184,196,204,0.03) 41px
+      );
+      pointer-events: none;
+    }
+
+    .bg-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+      50%      { opacity: 1;   transform: translate(-50%,-50%) scale(1.1); }
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 100;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards 0.3s;
+      border-bottom: 1px solid rgba(184,196,204,0.08);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      color: #ffffff;
+    }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: rgba(214,221,227,0.6);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    #nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    #nav-toggle span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: #ffffff;
+      transition: all 0.3s;
+    }
+
+    .hero-content {
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      padding: 0 24px;
+    }
+
+    .hero-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.5em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.2s;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      line-height: 1.4;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.5s;
+    }
+    .hero-title span {
+      display: block;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .hero-divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 28px auto;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards 0.9s;
+    }
+
+    .hero-desc {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: var(--steel);
+      line-height: 2.2;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 1.1s;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-cutter {
+      position: absolute;
+      right: 8%; top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      animation: fadeInDim 1.4s ease forwards 0.8s;
+    }
+    @keyframes fadeInDim { to { opacity: 0.18; } }
+
+    .scroll-hint {
+      position: absolute; bottom: 40px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 1.6s;
+    }
+    .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.4em; color: rgba(184,196,204,0.4); }
+    .scroll-arrow {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollDrop 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollDrop {
+      0%,100% { transform: scaleY(0.3); transform-origin: top; opacity: 0.3; }
+      50%      { transform: scaleY(1); opacity: 1; }
+    }
+
+    section { padding: 100px 48px; max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 0.7rem;
+      letter-spacing: 0.5em;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+      color: var(--silver);
+    }
+
+    .features { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+
+    .feature-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(184,196,204,0.1);
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s ease;
+    }
+    .feature-card.visible { opacity: 1; transform: translateY(0); }
+    .feature-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--gold);
+      transition: height 0.5s ease 0.3s;
+    }
+    .feature-card.visible::before { height: 100%; }
+    .feature-card:hover {
+      background: rgba(200,169,110,0.04);
+      border-color: rgba(200,169,110,0.3);
+    }
+    .feature-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.5rem;
+      color: rgba(200,169,110,0.2);
+      line-height: 1; margin-bottom: 16px;
+    }
+    .feature-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.05rem; letter-spacing: 0.15em;
+      margin-bottom: 14px; color: var(--silver);
+    }
+    .feature-text { font-size: 0.75rem; line-height: 2; color: rgba(184,196,204,0.7); }
+
+    .ruled-line {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, var(--gold), rgba(200,169,110,0.1));
+      margin: 80px 0;
+    }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+    .about-specs { border: 1px solid rgba(184,196,204,0.1); }
+    .spec-row {
+      display: flex;
+      border-bottom: 1px solid rgba(184,196,204,0.06);
+      opacity: 0; transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-row.visible { opacity: 1; transform: translateX(0); }
+    .spec-label {
+      width: 110px; flex-shrink: 0;
+      padding: 14px 18px;
+      font-size: 0.68rem; letter-spacing: 0.15em;
+      color: rgba(184,196,204,0.45);
+      border-right: 1px solid rgba(184,196,204,0.06);
+    }
+    .spec-val {
+      padding: 14px 18px;
+      font-size: 0.76rem; letter-spacing: 0.08em;
+      color: rgba(214,221,227,0.85); line-height: 1.8;
+    }
+
+    .about-text p {
+      font-size: 0.8rem; line-height: 2.4;
+      color: rgba(184,196,204,0.8); margin-bottom: 1.5em;
+    }
+
+    #contact-section {
+      background: rgba(255,255,255,0.015);
+      border-top: 1px solid rgba(184,196,204,0.07);
+    }
+
+    .contact-form {
+      max-width: 560px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 0.62rem; letter-spacing: 0.25em;
+      color: rgba(184,196,204,0.45);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(184,196,204,0.15);
+      border-radius: 2px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: rgba(200,169,110,0.5);
+      background: rgba(255,255,255,0.06);
+    }
+    .form-group select option { background: #1a1e22; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      margin-top: 8px;
+      padding: 14px 36px;
+      background: transparent;
+      border: 1px solid rgba(200,169,110,0.5);
+      color: var(--gold);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.4em;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+      align-self: flex-start;
+    }
+    .form-submit:hover {
+      background: rgba(200,169,110,0.1);
+      border-color: var(--gold);
+      color: #ffffff;
+    }
+    .form-submit:disabled { opacity: 0.4; cursor: default; }
+
+    .form-note {
+      font-size: 0.62rem; letter-spacing: 0.12em;
+      color: rgba(184,196,204,0.3); line-height: 1.8;
+    }
+
+    #form-success {
+      display: none;
+      font-size: 0.75rem; letter-spacing: 0.2em;
+      color: rgba(200,169,110,0.8); padding: 16px 0;
+    }
+
+    footer {
+      border-top: 1px solid rgba(184,196,204,0.1);
+      padding: 40px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.85rem; letter-spacing: 0.3em; color: var(--steel);
+    }
+    .footer-copy {
+      font-size: 0.65rem; letter-spacing: 0.2em; color: rgba(184,196,204,0.25);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(10,10,10,0.97);
+        padding: 20px 24px;
+        gap: 16px;
+        border-bottom: 1px solid rgba(184,196,204,0.08);
+      }
+      .nav-links.open { display: flex; }
+      #nav-toggle { display: flex; }
+      section { padding: 64px 20px; }
+      .features { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-cutter { display: none; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .spec-label { width: 90px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="header" id="header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="index.html" class="logo">
-          <span class="logo-jp">精和機工株式会社</span>
-          <span class="logo-en">SEIWA KIKO CO., LTD.</span>
-        </a>
-        <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-        <nav class="nav" id="nav" aria-label="メインナビゲーション">
-          <ul class="nav-list">
-            <li><a href="index.html"   class="nav-link active">ホーム</a></li>
-            <li><a href="about.html"   class="nav-link">会社概要</a></li>
-            <li><a href="contact.html" class="nav-link nav-contact">お問い合わせ</a></li>
-          </ul>
-        </nav>
+<nav id="nav">
+  <div class="nav-logo">株式会社小瀬</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about" onclick="closeNav()">会社概要</a></li>
+    <li><a href="#features" onclick="closeNav()">技術・設備</a></li>
+    <li><a href="#contact-section" onclick="closeNav()">お問い合わせ</a></li>
+  </ul>
+  <div id="nav-toggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="bg-lines"></div>
+  <div class="bg-glow"></div>
+
+  <div class="hero-cutter">
+    <svg width="320" height="320" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <g class="spin-group">
+        <rect class="shank" x="74" y="20" width="12" height="45" rx="2"/>
+        <rect x="72" y="60" width="16" height="8" rx="1" fill="#5a6a76" stroke="#8a9aa6" stroke-width="0.5"/>
+        <rect x="71" y="68" width="18" height="42" rx="1" fill="#6a7a88" stroke="#9ab0be" stroke-width="0.5"/>
+        <path class="flute" d="M 74 70 Q 76 85 74 95 Q 72 105 74 110"/>
+        <path class="flute" d="M 80 68 Q 82 83 80 93 Q 78 103 80 108"/>
+        <path class="flute" d="M 86 70 Q 84 85 86 95 Q 88 105 86 110"/>
+        <path class="flute" d="M 80 72 Q 77 87 79 97 Q 81 107 79 112"/>
+        <polygon class="tip" points="71,110 80,120 89,110"/>
+        <line class="cutting-edge" x1="71" y1="110" x2="80" y2="122"/>
+        <line class="cutting-edge" x1="89" y1="110" x2="80" y2="122"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-sub">PRECISION MACHINING · HIDA TAKAYAMA</div>
+    <h1 class="hero-title">
+      <span>株式会社小瀬</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      精密加工の技術と誠実さで、<br>
+      お客様の「困った」を「できた」に変える。
+    </p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="section-label">TECHNOLOGY &amp; EQUIPMENT</div>
+  <h2 class="section-title">技術・設備</h2>
+  <div class="ruled-line" style="margin: 0 0 48px;"></div>
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-num">01</div>
+      <div class="feature-name">精密マシニング</div>
+      <p class="feature-text">オークマMCを中心とした精密加工。公差±0.05mmの高精度部品・治具製作に対応します。</p>
+    </div>
+    <div class="feature-card" style="transition-delay:0.15s">
+      <div class="feature-num">02</div>
+      <div class="feature-name">ワイヤーカット</div>
+      <p class="feature-text">ソディックワイヤーカット機による精密放電加工。複雑形状にも柔軟に対応可能です。</p>
+    </div>
+    <div class="feature-card" style="transition-delay:0.3s">
+      <div class="feature-num">03</div>
+      <div class="feature-name">迅速対応</div>
+      <p class="feature-text">小ロット・急ぎの案件も歓迎。大手にはできない柔軟な対応力が私たちの強みです。</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="ruled-line" style="margin-top:0"></div>
+  <div class="section-label">ABOUT US</div>
+  <h2 class="section-title">会社概要</h2>
+  <div class="about-grid">
+    <div class="about-specs">
+      <div class="spec-row" data-delay="0">
+        <div class="spec-label">会社名</div>
+        <div class="spec-val">株式会社小瀬</div>
+      </div>
+      <div class="spec-row" data-delay="80">
+        <div class="spec-label">所在地</div>
+        <div class="spec-val">岐阜県</div>
+      </div>
+      <div class="spec-row" data-delay="160">
+        <div class="spec-label">事業内容</div>
+        <div class="spec-val">精密機械部品加工<br>治具・ジグ製作</div>
+      </div>
+      <div class="spec-row" data-delay="240">
+        <div class="spec-label">主要設備</div>
+        <div class="spec-val">オークマ MC マシニングセンタ<br>ソディック ワイヤーカット</div>
+      </div>
+      <div class="spec-row" data-delay="320">
+        <div class="spec-label">対応公差</div>
+        <div class="spec-val">±0.05 mm</div>
       </div>
     </div>
-  </header>
-
-  <main>
-
-    <!-- ===== HERO ===== -->
-    <section class="hero" aria-label="メインビジュアル">
-      <div class="container">
-        <div class="hero-content">
-          <p class="hero-label">PRECISION MANUFACTURING</p>
-          <h1 class="hero-title">
-            高精度な部品・治具で<br>
-            ものづくりを支える
-          </h1>
-          <p class="hero-text">
-            専用機械の構成部品から各種治具まで、<br>
-            精密加工技術と品質管理で産業の発展に貢献します。
-          </p>
-          <div class="hero-buttons">
-            <a href="about.html"   class="btn btn-primary">会社概要を見る</a>
-            <a href="contact.html" class="btn btn-outline">お問い合わせ</a>
-          </div>
-        </div>
-      </div>
-      <div class="hero-scroll" aria-hidden="true">
-        <span>SCROLL</span>
-        <div class="scroll-line"></div>
-      </div>
-    </section>
-
-    <!-- ===== STRENGTHS ===== -->
-    <section class="section section-light" id="strengths" aria-labelledby="strengths-title">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">OUR STRENGTHS</p>
-          <h2 class="section-title" id="strengths-title">私たちの強み</h2>
-          <p class="section-desc">40年以上の実績と最新設備で、お客様の要求精度に応えます</p>
-        </div>
-
-        <div class="feature-grid">
-
-          <div class="feature-card fade-in">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.2"/>
-                <path d="M24 13v11l7 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="38" cy="10" r="5" fill="currentColor" opacity="0.25"/>
-                <path d="M36 8l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="feature-title">高精度加工技術</h3>
-            <p class="feature-text">公差±0.005mmの超精密加工を実現。5軸マシニングセンタをはじめとする最新設備と熟練技術者が、お客様の難しい加工ニーズにお応えします。</p>
-          </div>
-
-          <div class="feature-card fade-in">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="8" width="32" height="32" rx="5" stroke="currentColor" stroke-width="2.2"/>
-                <path d="M16 24l6 6 10-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <h3 class="feature-title">徹底した品質管理</h3>
-            <p class="feature-text">ISO 9001:2015認証取得。三次元測定機による全数・抜き取り検査を徹底し、不良品の流出を防ぎます。品質記録の完全トレーサビリティを確保しています。</p>
-          </div>
-
-          <div class="feature-card fade-in">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 6l18 9v18L24 42 6 33V15L24 6z" stroke="currentColor" stroke-width="2.2"/>
-                <path d="M24 6v36" stroke="currentColor" stroke-width="2.2" stroke-dasharray="3 3"/>
-                <path d="M6 15l18 10 18-10" stroke="currentColor" stroke-width="2.2"/>
-              </svg>
-            </div>
-            <h3 class="feature-title">一貫生産体制</h3>
-            <p class="feature-text">設計・加工・熱処理・表面処理・検査まで自社で一貫対応。外注依存を最小限に抑え、品質と納期を確実にコントロールします。</p>
-          </div>
-
-          <div class="feature-card fade-in">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 24h8M32 24h8M24 8v8M24 32v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-                <circle cx="24" cy="24" r="10" stroke="currentColor" stroke-width="2.2"/>
-                <circle cx="24" cy="24" r="4" fill="currentColor"/>
-              </svg>
-            </div>
-            <h3 class="feature-title">柔軟な短納期対応</h3>
-            <p class="feature-text">急ぎの試作品から量産品まで、柔軟なスケジュール管理で対応。お客様の生産ラインを止めない納期厳守を徹底しています。</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PRODUCTS & SERVICES ===== -->
-    <section class="section section-dark" id="products" aria-labelledby="products-title">
-      <div class="container">
-        <div class="section-header section-header-dark">
-          <p class="section-label">PRODUCTS &amp; SERVICES</p>
-          <h2 class="section-title" id="products-title">製品・サービス</h2>
-          <p class="section-desc">専用機械の構成部品から各種治具まで幅広く対応</p>
-        </div>
-
-        <div class="product-grid">
-
-          <div class="product-card fade-in">
-            <div class="product-num">01</div>
-            <h3 class="product-title">精密構成部品</h3>
-            <p class="product-text">専用機械・自動化設備向けの精密構成部品を製造。複雑形状・難削材にも対応し、お客様の設計仕様を忠実に再現します。</p>
-            <ul class="product-list">
-              <li>シャフト・スピンドル類</li>
-              <li>ブロック・プレート類</li>
-              <li>カム・リンク機構部品</li>
-              <li>ハウジング・ケーシング類</li>
-            </ul>
-          </div>
-
-          <div class="product-card fade-in">
-            <div class="product-num">02</div>
-            <h3 class="product-title">各種治具製作</h3>
-            <p class="product-text">溶接治具・検査治具・組立治具など、生産ラインに必要な各種治具を設計から製作。作業効率向上と品質安定に貢献します。</p>
-            <ul class="product-list">
-              <li>溶接・組立治具</li>
-              <li>検査・測定治具</li>
-              <li>加工用チャック・フィクスチャ</li>
-              <li>搬送・位置決め治具</li>
-            </ul>
-          </div>
-
-          <div class="product-card fade-in">
-            <div class="product-num">03</div>
-            <h3 class="product-title">専用工具・刃具</h3>
-            <p class="product-text">標準工具では対応できない特殊加工向けの専用工具・刃具を製作。最適な材料・形状の提案からアフターフォローまで対応します。</p>
-            <ul class="product-list">
-              <li>特殊カッター・ドリル類</li>
-              <li>専用ホルダー・アダプタ</li>
-              <li>成形バイト・チップ</li>
-              <li>ゲージ・テンプレート類</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== STATS ===== -->
-    <section class="stats-section" aria-label="実績数値">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat-item fade-in">
-            <div class="stat-num">40<span class="stat-unit">年以上</span></div>
-            <div class="stat-label">の製造実績</div>
-          </div>
-          <div class="stat-item fade-in">
-            <div class="stat-num">150<span class="stat-unit">社以上</span></div>
-            <div class="stat-label">の取引実績</div>
-          </div>
-          <div class="stat-item fade-in">
-            <div class="stat-num">5,000<span class="stat-unit">点/月</span></div>
-            <div class="stat-label">の生産能力</div>
-          </div>
-          <div class="stat-item fade-in">
-            <div class="stat-num">0.01<span class="stat-unit">%以下</span></div>
-            <div class="stat-label">の不良率</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== NEWS ===== -->
-    <section class="section section-light" id="news" aria-labelledby="news-title">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">NEWS</p>
-          <h2 class="section-title" id="news-title">新着情報</h2>
-        </div>
-        <div class="news-list">
-          <article class="news-item fade-in">
-            <time class="news-date" datetime="2025-12-10">2025.12.10</time>
-            <span class="news-tag">お知らせ</span>
-            <a href="#" class="news-title">年末年始の休業期間について（2025年12月27日〜2026年1月5日）</a>
-          </article>
-          <article class="news-item fade-in">
-            <time class="news-date" datetime="2025-10-15">2025.10.15</time>
-            <span class="news-tag">実績</span>
-            <a href="#" class="news-title">第2工場の設備増強が完了。月産能力を20%向上しました</a>
-          </article>
-          <article class="news-item fade-in">
-            <time class="news-date" datetime="2025-08-01">2025.08.01</time>
-            <span class="news-tag">認証</span>
-            <a href="#" class="news-title">ISO 9001:2015の更新審査に合格しました</a>
-          </article>
-          <article class="news-item fade-in">
-            <time class="news-date" datetime="2025-04-01">2025.04.01</time>
-            <span class="news-tag">採用</span>
-            <a href="#" class="news-title">2025年度新卒・中途採用を実施中です。詳しくはお問い合わせください</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CTA ===== -->
-    <section class="cta-section" aria-label="お問い合わせ案内">
-      <div class="container">
-        <div class="cta-content">
-          <h2 class="cta-title">まずはお気軽にご相談ください</h2>
-          <p class="cta-text">
-            図面・仕様書をお送りいただければ、迅速にお見積りいたします。<br>
-            試作・小ロットからお受けしています。
-          </p>
-          <a href="contact.html" class="btn btn-gold">お問い合わせ・お見積り依頼</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-col">
-          <div class="footer-logo">
-            <span class="logo-jp">精和機工株式会社</span>
-            <span class="logo-en">SEIWA KIKO CO., LTD.</span>
-          </div>
-          <p class="footer-desc">専用機械の構成部品・治具製造を通じて、日本のものづくりを支え続けています。</p>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-heading">サイトマップ</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">ホーム</a></li>
-            <li><a href="about.html">会社概要</a></li>
-            <li><a href="contact.html">お問い合わせ</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-heading">お問い合わせ</h4>
-          <address class="footer-address">
-            <p>〒471-0001<br>愛知県豊田市明和町1丁目23-4</p>
-            <p>TEL: <a href="tel:0565001234">0565-00-1234</a></p>
-            <p>FAX: 0565-00-1235</p>
-            <p>MAIL: <a href="mailto:info@seiwa-kiko.co.jp">info@seiwa-kiko.co.jp</a></p>
-            <p>営業時間: 平日 8:00〜17:30</p>
-          </address>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 精和機工株式会社 All Rights Reserved.</p>
-      </div>
+    <div class="about-text">
+      <p>岐阜県に拠点を置く、精密機械部品・治具の製造会社です。創業以来、一貫して「確かな品質」と「誠実な対応」を大切にしてきました。</p>
+      <p>オークマMCマシニングセンタ・ソディックワイヤーカット機を中心に、お客様のニーズに合わせた柔軟な製造体制を整えています。</p>
+      <p>小規模だからこそできる、迅速かつ丁寧なものづくりを提供します。</p>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<div id="contact-section">
+  <section>
+    <div class="section-label">CONTACT</div>
+    <h2 class="section-title">お問い合わせ</h2>
+    <div class="ruled-line" style="margin-top:0"></div>
+    <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>お名前 *</label>
+          <input type="text" name="name" required placeholder="山田 太郎">
+        </div>
+        <div class="form-group">
+          <label>会社名</label>
+          <input type="text" name="company" placeholder="株式会社〇〇">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>メールアドレス *</label>
+          <input type="email" name="email" required placeholder="info@example.com">
+        </div>
+        <div class="form-group">
+          <label>電話番号</label>
+          <input type="tel" name="tel" placeholder="000-0000-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>お問い合わせ種別</label>
+        <select name="type">
+          <option value="">選択してください</option>
+          <option value="quote">見積もり依頼</option>
+          <option value="tech">技術的なご相談</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>メッセージ *</label>
+        <textarea name="message" required placeholder="ご依頼内容・ご質問などをご記入ください"></textarea>
+      </div>
+      <p class="form-note">※ ご入力いただいた情報は、お問い合わせへの返答のみに使用します。</p>
+      <button class="form-submit" type="submit">送 信</button>
+      <div id="form-success">お問い合わせを受け付けました。後ほどご連絡いたします。</div>
+    </form>
+  </section>
+</div>
+
+<footer id="contact">
+  <div class="footer-logo">株式会社小瀬</div>
+  <div class="footer-copy">© 2025 Kabushikigaisha Kose. All Rights Reserved.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = e.target.dataset.delay || 0;
+        setTimeout(() => e.target.classList.add('visible'), +delay);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.feature-card, .spec-row').forEach(el => observer.observe(el));
+
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('nav-links').classList.remove('open');
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '送信中...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('contact-form').style.opacity = '0.3';
+      document.getElementById('contact-form').style.pointerEvents = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }, 1000);
+  }
+</script>
 </body>
 </html>
